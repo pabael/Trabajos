@@ -1,0 +1,12 @@
+<app-search
+  (onSearching)="searching()"
+  (onResultList)="setResultList($event)">
+</app-search>
+<div *ngIf="loading" class="loader"></div>
+<div class="results" *ngIf="!loading">
+  <app-book-list
+    (onButton1)="button1($event)"
+    (onButton2)="button2($event)"
+    [list]="resultList">
+  </app-book-list>
+</div>

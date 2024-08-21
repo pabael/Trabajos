@@ -1,0 +1,19 @@
+<header>
+  <div class="title" routerLink="/search-book" (click)="reloadSearch()" >
+    <img src="../favicon.ico">
+    <h1> Librería </h1>
+  </div>
+  <nav>
+    <ul>
+      <li> <a routerLink="/main" routerLinkActive="active">Mis libros</a></li>
+      <li> <a routerLink="/search-book" routerLinkActive="active">Search books</a></li>
+      <li> <a routerLink="/search-author" routerLinkActive="active">Search Authors</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <router-outlet></router-outlet>
+</main>
+<footer>
+  <p>&copy; 2024 Paloma Balmori Elósegui.</p>
+</footer>

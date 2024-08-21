@@ -1,0 +1,8 @@
+<ul class="list-container">
+  <li *ngFor="let item of list">
+    <app-card [item]="item"
+    (onButton1)="button1($event)"
+    (onButton2)="button2($event)">
+    </app-card>
+  </li>
+</ul>

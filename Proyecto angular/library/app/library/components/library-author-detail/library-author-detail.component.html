@@ -1,0 +1,23 @@
+<div *ngIf="loading[0] || loading[1]" class="loader"></div>
+<div class="author-detail-container" *ngIf="!loading[0] && !loading[1]">
+  <div class="main-info">
+    <figure>
+      <img [src] = "author.photo  | defaultImage" alt="Portada del libro">
+    </figure>
+    <div class = "author-info">
+      <h1 *ngIf="!author.death_date && !author.birth_date"> {{author.name}} </h1>
+      <h1 *ngIf="author.death_date && author.birth_date">{{author.name}} ( {{author.birth_date}} - {{author.death_date}} )</h1>
+      <h1 *ngIf="!author.death_date && author.birth_date">{{author.name}} ( {{author.birth_date}} )</h1>
+      <h2>{{author.alternate_names?.join('; ') }}</h2>
+     </div>
+  </div>
+  <p> {{author.bio}} </p>
+  <div *ngIf="author.books.length>0">
+    <h2> Libros del autor: </h2>
+    <app-book-list class = "books"
+      (onButton1)="button1($event)"
+      (onButton2)="button2($event)"
+      [list] = "cardList">
+    </app-book-list>
+  </div>
+</div>

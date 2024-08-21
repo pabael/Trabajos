@@ -1,0 +1,29 @@
+<div *ngIf="loading" class="loader"></div>
+<div class="book-detail-container" *ngIf="!loading">
+  <figure>
+    <img [src] = "bookDetail.imageUrl  | defaultImage" alt="Portada del libro">
+    <figcaption *ngIf="bookDetail.date"> Publicado por primera vez en {{ bookDetail.date | date:'yyyy' }}</figcaption>
+  </figure>
+  <div class="info">
+    <h1>{{bookDetail.title}}</h1>
+    <h2> {{bookDetail.subtitle}} </h2>
+    <div class ="authors">
+      <a *ngFor="let author of bookDetail.authorList" [routerLink]="['/author', author.olid]">
+        {{ author.name }}
+      </a>
+    </div>
+    <p> {{bookDetail.description}} </p>
+  </div>
+  <div class="buttons">
+    <button class ="favButton"
+    (click)="clickFav($event)"
+    [ngClass]="{ 'book-fav': bookDetail.fav, 'book-no-fav':!bookDetail.fav}">
+      &#x2764;
+    </button>
+    <button class ="addButton"
+    (click)="clickAdd($event)"
+    [ngClass]="{ 'book-added': bookDetail.fav!==undefined , 'book-no-added':bookDetail.fav===undefined}">
+    +
+    </button>
+  </div>
+</div>

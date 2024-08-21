@@ -1,0 +1,25 @@
+<div class="search-container">
+  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+    <fieldset class="typeSearch" *ngIf="showOptions()">
+      <span>Buscar libro por: </span>
+      <div class="option">
+        <input type="radio" formControlName="option" value="title">
+        <label for="title"> Título </label>
+      </div>
+      <div class="option">
+        <input type="radio" formControlName="option" value="author">
+        <label for="author"> Autor </label>
+      </div>
+      <div class="option">
+        <input type="radio" formControlName="option" value="q">
+        <label for="both"> Búsqueda general </label>
+      </div>
+    </fieldset>
+    <fieldset class="search">
+      <label>
+        <input type="text" formControlName="input" placeholder="Introduzca su búsqueda">
+      </label>
+      <button type="submit">Search</button>
+    </fieldset>
+  </form>
+</div>

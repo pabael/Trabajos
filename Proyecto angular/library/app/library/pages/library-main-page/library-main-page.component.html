@@ -1,0 +1,20 @@
+<ul class="main-page-container" >
+  <li class="fav-container" *ngIf="getFavList.length!==0">
+    <h2>Favoritos</h2>
+    <app-book-list
+      (onButton1)="button1($event)"
+      (onButton2)="button2($event)"
+      [list]="getFavList">
+    </app-book-list>
+  </li>
+  <hr *ngIf="getFavList.length!==0 && getNoFavList.length!==0">
+  <hr *ngIf="getFavList.length!==0 && getNoFavList.length!==0">
+  <li class="no-fav-container" *ngIf="getNoFavList.length!==0">
+    <h2>Todos los libros</h2>
+    <app-book-list
+      (onButton1)="button1($event)"
+      (onButton2)="button2($event)"
+      [list]="getNoFavList">
+    </app-book-list>
+  </li>
+</ul>

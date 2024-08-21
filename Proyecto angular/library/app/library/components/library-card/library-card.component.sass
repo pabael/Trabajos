@@ -1,0 +1,115 @@
+@import ../../../../styles
+
+@import ../../../../styles
+:host
+  flex-grow: 1
+
+.item-container
+  background-color: $main-medium-color
+  position: relative
+  height: 100%
+  display: flex
+  align-items: center
+  justify-content: center
+  box-sizing: content-box
+  border: 3px solid $main-medium-color
+  cursor: pointer
+
+.item-container:hover
+  border: 3px solid $main-dark-color
+  border-radius: 5px
+
+a
+  font-size: 1.5em
+  margin-bottom: 10px
+  color: inherit
+
+a:hover
+  color: $main-light-color
+
+.buttons
+  position: absolute
+  top: -5px
+  display: flex
+  flex-direction: row-reverse
+  justify-content: space-between
+  width: 100%
+
+button
+  cursor: pointer
+  background-color: transparent
+  border: none
+
+.button1
+  right: 3px
+  font-size: 2em
+  color: $main-light-color
+
+.button2
+  left: 3px
+  font-size: 3em
+  color: $main-light-color
+
+.button2-clicked
+  color: $main-dark-color
+
+.button2-clicked:hover
+  color: $main-light-color
+
+.button2:hover
+  color: $main-dark-color
+
+.button1-clicked
+  color: $main-dark-color
+
+.button1-clicked:hover
+  color: $main-light-color
+
+.button1:hover
+  color: $main-dark-color
+
+.info
+  display: flex
+  flex-direction: row
+  margin: 30px
+
+.item-description
+  text-align: center
+  margin:5px
+  padding: 15px
+  display: flex
+  flex-direction: column
+
+figure
+  margin: 10px
+  display: flex
+  align-items: center
+
+img
+  max-height: 150px
+  border: 1px solid $main-dark-color
+
+h1
+  margin-top: 0
+  margin-bottom: 10px
+
+span
+  margin-top: 10px
+
+@media (max-width: 1200px)
+  :host
+    width: 30vw
+
+  .item-container
+    justify-content: center
+
+  .info
+    flex-direction: column
+    align-items: center
+
+  .item-description
+    padding: 0
+
+@media (max-width: 660px)
+  :host
+    width: 80vw

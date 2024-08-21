@@ -1,0 +1,117 @@
+@import ../../../../styles
+:host
+  display: flex
+  align-items: center
+  justify-content: center
+
+.book-detail-container
+  display: flex
+  flex-direction: row
+  margin: 30px
+  position: relative
+  width: 60vw
+
+figure
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  margin: 0
+
+figcaption
+  text-align: right
+  margin-top: 5px
+
+img
+  max-width: 300px
+  max-height: 400px
+  min-height: 200px
+  min-width: 100px
+
+.info
+  margin-left: 30px
+
+.authors
+  display: flex
+  flex-direction: row
+
+a
+  margin-right: 10px
+  color: inherit
+
+a:hover
+  color: $main-medium-color
+
+.loader
+  border: 8px solid $main-medium-color
+  border-top: 8px solid $main-dark-color
+  border-radius: 50%
+  width: 50px
+  height: 50px
+  animation: spin 1s linear infinite
+  margin: 50vh
+
+.buttons
+  position: absolute
+  top: 3px
+  display: flex
+  flex-direction: row-reverse
+  width: 100%
+
+button
+  cursor: pointer
+  background-color: transparent
+  border: none
+
+.favButton
+  font-size: 2em
+
+.addButton
+  font-size: 3em
+
+.book-added
+  color: $main-dark-color
+
+.book-added:hover
+  color: $main-medium-color
+
+.book-no-added
+  color: $main-medium-color
+
+.book-no-added:hover
+  color: $main-dark-color
+
+.book-fav
+  color: $main-dark-color
+
+.book-fav:hover
+  color: $main-medium-color
+
+.book-no-fav
+  color: $main-medium-color
+
+.book-no-fav:hover
+  color: $main-dark-color
+
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
+@media (max-width: 900px)
+.book-detail-container
+    width: 80vw
+
+@media (max-width: 800px)
+  img
+    max-width: 200px
+    max-height: 300px
+    min-height: 0px
+    min-width: 0px
+
+
+@media (max-width: 600px)
+  .book-detail-container
+    flex-direction: column
+

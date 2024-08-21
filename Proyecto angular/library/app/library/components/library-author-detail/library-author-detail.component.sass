@@ -1,0 +1,40 @@
+@import ../../../../styles
+:host
+  display: flex
+  align-items: center
+  justify-content: center
+
+.author-detail-container
+  display: flex
+  flex-direction: column
+  margin: auto
+  width: 60vw
+
+.main-info
+  display: flex
+  flex-direction: row
+  justify-content: left
+
+.loader
+  border: 8px solid $main-medium-color
+  border-top: 8px solid $main-dark-color
+  border-radius: 50%
+  width: 50px
+  height: 50px
+  animation: spin 1s linear infinite
+  margin: 50vh
+
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
+@media (max-width: 900px)
+.author-detail-container
+    width: 80vw
+
+@media (max-width: 600px)
+  .author-detail-container
+    flex-direction: column
+
