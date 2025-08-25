@@ -1,0 +1,8 @@
+<div class="brand-list-grid">
+  <div *ngFor="let brand of brandsList; let i = index" class="brand-item">
+    <app-brand-card 
+      [brand]="brand"
+      (onBrandDetails)="brandDetails($event)">
+    </app-brand-card>
+  </div>
+</div>

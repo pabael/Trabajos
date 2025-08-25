@@ -1,0 +1,58 @@
+@import '../../../../../styles.sass'
+
+.message 
+  max-width: 50ch
+  margin: auto
+  margin-top: 40px
+.home-container
+  min-height: 100vh
+  overflow: hidden
+
+.map-list-container
+  max-width: 100vw
+  flex-direction: row
+  display: flex
+
+.brand-list
+  width: 30ch
+  height: 40vh
+  border: 4px solid $dark-background
+  padding: 30px
+  overflow-y: auto
+  align-items: center
+
+  p
+    margin-bottom: 0
+
+.loader
+  border: 10px solid $primary-color
+  border-top: 10px solid $secondary-color
+  border-radius: 50%
+  width: 70px
+  height: 70px
+  animation: spin 1s linear infinite
+  margin: 200px auto
+
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
+@media(max-width:1500px)
+  .map
+    width: 750px
+    height: 600px
+
+@media(max-width: 1200px)
+  .map
+    width: 550px
+    height: 400px
+
+@media(max-width: 920px)
+  .map-list-container
+    flex-direction: column
+
+@media(max-width: 426px)
+  .map-list-container
+    display: none

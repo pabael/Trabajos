@@ -1,0 +1,46 @@
+@import '../../../../../styles.sass'
+
+.labels
+  height: 200px
+  overflow: auto
+
+.col-12
+  border: 2px solid $dark-background
+  padding: 10px
+
+.form-label 
+  margin-left: 0.5rem
+  margin-bottom: 0
+
+select
+  margin-top: 10px
+
+.filters-container
+  transition: max-height 0.3s ease-out
+  overflow: hidden
+  height: fit-content
+
+.btn-filter-toggle
+  position: fixed
+  top: 100px
+  right: 20px
+  background-color: $primary-color
+  color: white
+  border-radius: 50%
+  padding: 10px 15px
+  z-index: 1000
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
+  display: none
+
+  @media (max-width: 768px)
+    display: block
+  
+@media (max-width: 768px)
+  .filters-container
+    position: fixed
+    top: 100px
+    right: 20px
+    z-index: 999
+    background-color: $medium-background
+    overflow-y: auto
+    height: 60vh

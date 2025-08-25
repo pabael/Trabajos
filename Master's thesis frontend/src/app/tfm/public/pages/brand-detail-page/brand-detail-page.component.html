@@ -1,0 +1,14 @@
+<div class="container brand-detail-contianer mt-5" *ngIf="isLoading" >
+  <div class="skeleton">
+    <div class="card">
+    </div>
+  </div>
+</div>
+
+<button *ngIf="!isLoading" (click)="goBack()">
+  <i class="fa-solid fa-arrow-left"></i>
+</button>
+
+<app-brand-detail *ngIf="!isLoading"
+[brand]="brand">
+</app-brand-detail>

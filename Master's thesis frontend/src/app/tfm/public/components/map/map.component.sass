@@ -1,0 +1,26 @@
+path
+  cursor: pointer
+
+path:hover
+  fill: #2c3e2f
+
+path.disabled 
+  fill: #D3E1D5
+  cursor: not-allowed
+
+path.active 
+  fill: #2c3e2f
+
+svg
+  transform: translateX(-80px)
+
+  @media(max-width:1500px)
+    transform: scale(0.8) translateX(-80px)
+    transform-origin: top left
+  
+  @media(max-width:1200px)
+    transform: scale(0.6) translateX(-80px)
+  
+  @media(max-width:600px)
+    transform: scale(0.5) translateX(-20px)
+  

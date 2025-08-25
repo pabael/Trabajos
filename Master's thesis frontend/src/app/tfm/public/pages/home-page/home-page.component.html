@@ -1,0 +1,33 @@
+<main class="home-container">
+  <p class="message" *ngIf="isLoading">Para poder asegurar este servicio gratuitamente, se utiliza un servidor gratuito. Por ello, puede tardar en arrancar un par de minutos. Lamentamos las molestias.</p>
+
+  <div *ngIf="isLoading" class="loader"></div>
+
+  <div class="d-flex flex-column" *ngIf="!isLoading">
+    <app-categories-menu *ngIf="allCategories.length > 0" 
+    (onCategoryClicked) = "categoryClicked($event)"
+    [categories]="allCategories">
+    </app-categories-menu>
+    <div class="align-items-center p-5 map-list-container">
+      <app-map class="map" *ngIf="provinces.length > 0" 
+        [provinces]="provinces"
+        (onProvince)="provinceClicked($event)">
+      </app-map>
+    
+      <div class="d-flex flex-column flex-grow-1 align-items-center">
+        <div class="brand-list">
+          <app-brands-list
+            *ngIf="brandsList.length > 0" 
+            [brandsList]="brandsList" 
+            (onBrandDetails)="brandDetails($event)">
+          </app-brands-list>
+          <p *ngIf="brandsList.length == 0"> 
+            Aquí encontrarás una selección de empresas comprometidas con el medio ambiente, que crean productos de alta calidad mientras cuidan de nuestro planeta.  
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <router-outlet></router-outlet>
+</main>
