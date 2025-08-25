@@ -1,0 +1,225 @@
+<div class="container mt-5">
+    <h2>{{ editBrand ? 'Editar Marca' : 'Añadir Marca' }}</h2>
+    <form [formGroup]="form" (ngSubmit)="submitForm()">
+        <!-- Name -->
+        <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" formControlName="name" required [ngClass]="{'text-muted': editBrand}" 
+            >
+        </div>
+    
+        <!-- Summary -->
+        <div class="mb-3">
+            <label for="summary" class="form-label">Resumen</label>
+            <textarea class="form-control" id="summary" formControlName="summary" rows="3" [ngClass]="{'text-muted': editBrand}"></textarea>
+        </div>
+    
+        <!-- URL -->
+        <div class="mb-3">
+            <label for="url" class="form-label">URL</label>
+            <input type="url" class="form-control" id="url" formControlName="url">
+        </div>
+    
+        <!-- Materials -->
+        <div class="mb-3">
+            <label for="materials" class="form-label">Materiales</label>
+            <textarea class="form-control" id="materials" formControlName="materials" rows="3" [ngClass]="{'text-muted': editBrand}"></textarea>
+        </div>
+    
+        <!-- CrueltyFree -->
+        <div class="mb-3">
+            <label class="form-label">No probado en animales</label>
+            <div>
+                <label class="form-check-label me-3">
+                    <input type="radio" class="form-check-input" formControlName="crueltyFree" [value]="true"> Sí
+                </label>
+                <label class="form-check-label me-3">
+                    <input type="radio" class="form-check-input" formControlName="crueltyFree" [value]="false"> No
+                </label>
+                <label class="form-check-label me-3">
+                    <input type="radio" class="form-check-input" formControlName="crueltyFree" [value]="null"> No se sabe
+                </label>
+            </div>
+        </div>
+    
+        <!-- Vegan -->
+        <div class="mb-3">
+            <label class="form-label">Vegano</label>
+            <div>
+                <label class="form-check-label me-3">
+                    <input type="radio" class="form-check-input" formControlName="vegan" [value]="true"> Sí
+                </label>
+                <label class="form-check-label me-3">
+                    <input type="radio" class="form-check-input" formControlName="vegan" [value]="false"> No
+                </label>
+                <label class="form-check-label me-3">
+                    <input type="radio" class="form-check-input" formControlName="vegan" [value]="null"> No se sabe
+                </label>
+            </div>
+        </div>
+    
+        <!-- Commitment -->
+        <div class="mb-3">
+            <label for="commitment" class="form-label">Compromiso</label>
+            <textarea class="form-control" id="commitment" formControlName="commitment" rows="3" [ngClass]="{'text-muted': editBrand}"></textarea>
+        </div>
+    
+        <!-- Production -->
+        <div class="mb-3">
+            <label for="production" class="form-label">Producción</label>
+            <textarea class="form-control" id="production" formControlName="production" rows="3" [ngClass]="{'text-muted': editBrand}"></textarea>
+        </div>
+
+        <!-- Categories and subcategories -->
+        <div class="mb-3">
+            
+            <!-- Categories -->
+            <div class="mb-3">
+                <label class="form-label" for="category">Categoría:</label>
+                <div class="d-flex">
+                    <select class="form-select" id="category" [formControl]="categoryControl" (change)="onCategoryChange($event)">
+                        <option *ngFor="let cat of formInfo.allCategories" [value]="cat.name">{{ cat.name }}</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Subcategories -->
+            <div *ngIf="currentSubcategories && currentSubcategories.length > 0" class="mb-3">
+                <label class="form-label">Subcategorías:</label>
+                <div *ngFor="let subcat of currentSubcategories">
+                  <input
+                    type="checkbox"
+                    [value]="subcat"
+                    [checked]="subcategoryControl.value?.includes(subcat)"
+                    (change)="onSubcategoryChange($event)"
+                  >
+                  {{ subcat }}
+                </div>
+            </div>
+    
+            <button type="button" class="btn btn-secondary mt-2" (click)="addCategory()">Añadir categoría</button>
+        </div>
+
+        <!-- Categories selected -->
+        <div class="mb-3">
+            <label class="form-label" for="selected">Categorías seleccionadas:</label>
+            <ul style="list-style-type: none">
+                <li *ngFor="let cat of categoriesArray.controls; let i = index" class="mt-2" [ngClass]="{'text-muted': editBrand}">
+                    <button type="button" class="btn btn-danger btn-sm" (click)="removeCategory(i)">X</button>
+                    {{ cat.value.name }} 
+                    <span *ngIf="cat.value.subcategories && cat.value.subcategories.length > 0">- {{ cat.value.subcategories }}</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Labels -->
+        <div class="mb-3">
+            <label class="form-label">Etiquetas</label>
+            <div class="row" formGroupName="labels">
+                <div *ngFor="let label of formInfo.allLabels" class="col-md-4 form-check">
+                    <input 
+                        type="checkbox" 
+                        class="form-check-input" 
+                        [id]="label"
+                        [value]="label"
+                        [checked]="this.form.get('labels')?.value?.includes(label)"
+                        (change)="onLabelChange($event, label)"
+                    >
+                    <label class="form-check-label" [for]="label">
+                        {{ label }}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Consumer -->
+        <div class="mb-3">
+            <label for="consumers" class="form-label">Consumidores</label>
+            <div class="d-flex" formGroupName="consumers">
+                <div *ngFor="let consumer of formInfo.allConsumers" class="form-check me-3">
+                    <input 
+                        type="checkbox" 
+                        class="form-check-input" 
+                        [id]=consumer
+                        [value]="consumer"
+                        [checked]="this.form.get('consumers')?.value?.includes(consumer)"
+                        (change)="onConsumerChange($event, consumer)"
+                    >
+                    <label class="form-check-label" [for]="consumer">
+                        {{ consumer }}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Price -->
+        <div class="mb-3">
+            <label class="form-label">Rango de precio</label>
+            <div class="d-flex">
+                <div *ngFor="let price of formInfo.allPrices" class="form-check me-3">
+                    <label class="form-check-label me-3">
+                        <input 
+                            type="radio" 
+                            class="form-check-input" 
+                            formControlName="price" 
+                            [value]="price">
+                        {{ price }}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Autonomous Community -->
+        <div class="mb-3">
+            <label for="autonomousCommunity" class="form-label">Comunidad Autónoma</label>
+            <select class="form-select" id="autonomousCommunity" [formControl]="autonomousCommunityControl" (change)="autonomousCommunityChange($event)">
+                <option *ngFor="let community of formInfo.allAutonomousCommunities" [value]="community">{{ community }}</option>
+            </select>
+        </div>
+        
+        <!-- Province -->
+        <div class="mb-3" *ngIf="formInfo.allProvinces.length > 0">
+            <label for="province" class="form-label">Provincia</label>
+            <select class="form-select" id="province" [formControl]="provinceControl" (change)="provinceChange($event)">
+                <option *ngFor="let province of formInfo.allProvinces" [value]="province">{{ province }}</option>
+            </select>
+        </div>
+        
+        <!-- Location -->
+        <div class="form-group" *ngIf="formInfo.allLocations.length > 0">
+            <label for="location">Municipio</label>
+            <input 
+            type="text" 
+            id="location" 
+            class="form-control" 
+            [formControl]="locationControl"
+            (input)="onLocationInput()"
+            placeholder="Type to search for a location"
+            >
+            
+            <!-- Locations Suggestions -->
+            <ul *ngIf="filteredLocations.length > 0" class="list-group mt-2">
+            <li *ngFor="let location of filteredLocations" 
+                class="list-group-item" 
+                (click)="addLocation(location)">
+                {{ location }}
+            </li>
+            </ul>
+        </div>
+        
+        <!-- Locations selected -->
+        <div class="mb-3" *ngIf="locationsArray.controls.length > 0">
+            <label for="locationsList" class="form-label">Localizaciones Añadidas</label>
+            <ul id="locationsList" style="list-style-type: none">
+            <li *ngFor="let location of locationsArray.controls; let i = index" class="mt-2" [ngClass]="{'text-muted': editBrand}">
+                <button type="button" class="btn btn-danger btn-sm ms-2" (click)="removeLocation(i)">X</button>
+                {{ location.value.name }}, {{ location.value.province }}, {{ location.value.autonomousCommunity }}
+            </li>
+            </ul>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary mt-2"> {{ editBrand ? 'Editar' : 'Añadir' }}</button>
+    </form>
+</div>
+  
